@@ -12,11 +12,18 @@
 </p>
 <table class="table">
     <tr>
+        <td><form><input type="search" name="Keyword" value="" /><input type="submit" value="送出" /></form></td>
+    </tr>
+</table>
+<table class="table">
+    <tr>
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
         <th>
+            <a href="@Url.Action("Index", "Products", new { SortBy = "+Price", Keyword = ViewBag.keyword })">↑</a>
             @Html.DisplayNameFor(model => model.Price)
+            <a href="@Url.Action("Index", "Products", new { SortBy = "-Price", Keyword = ViewBag.keyword })">↓</a>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Active)

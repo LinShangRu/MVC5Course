@@ -29,6 +29,7 @@ namespace MVC5Course.Controllers
 
         public ActionResult Test()
         {
+            ViewBag.Message = "Home-Test";
             return View();
         }
     }

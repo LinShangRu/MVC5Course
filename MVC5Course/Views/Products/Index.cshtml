@@ -10,24 +10,31 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <td>
-            <form>
-                @Html.TextBox("Keyword")<input type="submit" value="送出" />
-            </form>
-        </td>
-    </tr>
-</table>
+
+    <table class="table">
+        <tr>
+            <td>
+                <form method="post">
+                    @Html.TextBox("Keyword")<input type="submit" value="送出" />
+                </form>
+            </td>
+        </tr>
+    </table>
+
+@using PagedList
+@using PagedList.Mvc
+
+@Html.PagedListPager(Model as IPagedList, (p) => Url.Action("Index", new { PageNo = p, SortBy= ViewBag.SortBy, Keyword = ViewBag.Keyword }))
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
         </th>
         <th>
-            <a href="@Url.Action("Index", "Products", new { SortBy = "+Price", Keyword = ViewBag.keyword })">↑</a>
+            <a href="@Url.Action("Index", "Products", new { SortBy = "+Price", Keyword = ViewBag.Keyword, PageNo = ViewBag.PageNo })">↑</a>
             @Html.DisplayNameFor(model => model.Price)
-            <a href="@Url.Action("Index", "Products", new { SortBy = "-Price", Keyword = ViewBag.keyword })">↓</a>
+            <a href="@Url.Action("Index", "Products", new { SortBy = "-Price", Keyword = ViewBag.Keyword, PageNo = ViewBag.PageNo })">↓</a>
         </th>
         <th>總價</th>
         <th>
@@ -39,27 +46,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td class=@(item.Price > 50 ? "text-danger" : "")>
-            @Html.DisplayFor(modelItem => item.Price) 
-        </td>
-        <td>@(String.Format("{0:N0}", item.Price * item.Stock))</td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td class=@(item.Price > 50 ? "text-danger" : "")>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>@(String.Format("{0:N0}", item.Price * item.Stock))</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td>
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
 
 </table>
+

@@ -29,6 +29,7 @@
             @Html.DisplayNameFor(model => model.Price)
             <a href="@Url.Action("Index", "Products", new { SortBy = "-Price", Keyword = ViewBag.keyword })">↓</a>
         </th>
+        <th>總價</th>
         <th>
             @Html.DisplayNameFor(model => model.Active)
         </th>
@@ -44,8 +45,9 @@
             @Html.DisplayFor(modelItem => item.ProductName)
         </td>
         <td class=@(item.Price > 50 ? "text-danger" : "")>
-            @Html.DisplayFor(modelItem => item.Price)
+            @Html.DisplayFor(modelItem => item.Price) 
         </td>
+        <td>@(String.Format("{0:N0}", item.Price * item.Stock))</td>
         <td>
             @Html.DisplayFor(modelItem => item.Active)
         </td>

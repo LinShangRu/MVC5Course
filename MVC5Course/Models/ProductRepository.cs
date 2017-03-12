@@ -13,7 +13,7 @@ namespace MVC5Course.Models
 
         public override IQueryable<Product> All()
         {
-            return base.All().Where(m => m.Stock < 500);
+            return base.All().Where(m => false == m.IsDeleted &&  m.Stock < 500);
         }
 
         public IQueryable<Product> All(bool showAll)
@@ -28,10 +28,11 @@ namespace MVC5Course.Models
             }
         }
 
-        //public override void Delete(Product entity)
-        //{
-        //    base.Delete(entity);
-        //}
+        public override void Delete(Product entity)
+        {
+            entity.IsDeleted = true;
+            //base.Delete(entity);
+        }
     }
 
     public interface IProductRepository : IRepository<Product>

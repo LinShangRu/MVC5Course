@@ -11,13 +11,13 @@ namespace MVC5Course.Models.Valids
 
         public 商品名稱不能出現123關鍵字Attribute() : base(DataType.Text)
         {
-            this.ErrorMessage = this.GetType().Name;
+            this.ErrorMessage = this.GetType().Name.Replace("Attribute","");
         }
         public override bool IsValid(object value)
         {
             string str = Convert.ToString(value);
 
-            if (str.Contains("Will"))
+            if (str.Contains("123"))
             {
                 return false;
             }

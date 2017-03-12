@@ -9,8 +9,8 @@ namespace MVC5Course.Models
     [MetadataType(typeof(ProductMetaData))]
     public partial class Product
     {
-        [StringLength(2)]
-        public int MyProperty { get; set; }
+        [Required]
+        public int ProductType { get; set; }
     }
     
     public partial class ProductMetaData
@@ -27,11 +27,15 @@ namespace MVC5Course.Models
         [Range(0, 100)]
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<decimal> Price { get; set; }
+
+        [Required]
         public Nullable<bool> Active { get; set; }
+        [Required]
         public Nullable<decimal> Stock { get; set; }
-    
+        [Required]
         public virtual ICollection<OrderLine> OrderLine { get; set; }
-        [StringLength(1)]
-        public int MyProperty { get; set; }
+
+        [Required]
+        public int ProductType { get; set; }
     }
 }

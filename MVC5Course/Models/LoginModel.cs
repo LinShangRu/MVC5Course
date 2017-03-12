@@ -31,7 +31,7 @@ namespace MVC5Course.Models
                 yield return ValidationResult.Success;
                 yield break;
             }
-            yield return new ValidationResult("登入失敗", new string[] { "Username" });
+            yield return new ValidationResult("登入失敗", new string[] { "Username"   });
             yield break;
         }
     }

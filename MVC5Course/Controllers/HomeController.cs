@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5Course.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,6 +32,17 @@ namespace MVC5Course.Controllers
         {
             ViewBag.Message = "Home-Test";
             return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginModel LoginData)
+        {
+            return Content(LoginData.UserName + ":" + LoginData.Password);
         }
     }
 }

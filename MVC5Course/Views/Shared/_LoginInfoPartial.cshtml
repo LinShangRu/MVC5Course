@@ -1,0 +1,2 @@
+﻿@using Microsoft.AspNet.Identity
+@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

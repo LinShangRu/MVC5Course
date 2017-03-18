@@ -20,7 +20,7 @@ namespace MVC5Course.Models
 
         [Required(ErrorMessage = "{0}為必填欄位")]
         [DisplayName("商品名稱")]
-        [StringLength(10, ErrorMessage="欄位長度不得大於 80 個字元")]
+        [StringLength(80, ErrorMessage="欄位長度不得大於 80 個字元")]
         [商品名稱不能出現123關鍵字]
         public string ProductName { get; set; }
 

@@ -17,9 +17,17 @@ namespace MVC5Course.Controllers
         //private ProductRepository db = RepositoryHelper.GetProductRepository();
 
         // GET: Products
-        
+
+
         //[ActionName("Index.aspx")]
         public ActionResult Index(string SortBy, string Keyword, int PageNo = 1)
+        {
+            IQueryable<Product> MyResult = DoSearchAll(ref SortBy, Keyword, PageNo);
+            return View(MyResult.ToPagedList(PageNo, 20));
+            //return View("Index", MyResult.ToPagedList(PageNo, 20));
+        }
+
+        private IQueryable<Product> DoSearchAll(ref string SortBy, string Keyword, int PageNo)
         {
             var MyResult = db.All().AsQueryable();
             if (!String.IsNullOrEmpty(Keyword))
@@ -37,9 +45,28 @@ namespace MVC5Course.Controllers
             ViewBag.PageNo = PageNo;
             ViewBag.SortBy = SortBy;
             ViewBag.Keyword = Keyword;
-            return View(MyResult.ToPagedList(PageNo,20));
-            //return View("Index", MyResult.ToPagedList(PageNo, 20));
+            return MyResult;
         }
+
+        [HttpPost]
+        public ActionResult Index(Product[] data, string SortBy, string Keyword, int PageNo = 1)
+        {
+            if (ModelState.IsValid && data !=null)
+            {
+                foreach (var MyProduct in data)
+                {
+                    var dbProduct = db.Find(MyProduct.ProductId);
+                    dbProduct.Stock = MyProduct.Stock;
+                    dbProduct.Active = MyProduct.Active;
+                    dbProduct.ProductName = MyProduct.ProductName;
+                    dbProduct.Price = MyProduct.Price;
+                }
+                db.UnitOfWork.Commit();
+            }
+            IQueryable<Product> MyResult = DoSearchAll(ref SortBy, Keyword, PageNo);
+            return View(MyResult.ToPagedList(PageNo, 20));
+        }
+
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {

@@ -11,13 +11,14 @@ using PagedList;
 
 namespace MVC5Course.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         //private FabricsEntities db = new FabricsEntities();
-        private ProductRepository db = RepositoryHelper.GetProductRepository();
+        //private ProductRepository db = RepositoryHelper.GetProductRepository();
 
         // GET: Products
         [Authorize]
+        //[ActionName("Index.aspx")]
         public ActionResult Index(string SortBy, string Keyword, int PageNo = 1)
         {
             var MyResult = db.All().AsQueryable();
@@ -37,6 +38,7 @@ namespace MVC5Course.Controllers
             ViewBag.SortBy = SortBy;
             ViewBag.Keyword = Keyword;
             return View(MyResult.ToPagedList(PageNo,20));
+            //return View("Index", MyResult.ToPagedList(PageNo, 20));
         }
         // GET: Products/Details/5
         public ActionResult Details(int? id)

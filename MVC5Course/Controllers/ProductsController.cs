@@ -17,9 +17,9 @@ namespace MVC5Course.Controllers
         //private ProductRepository db = RepositoryHelper.GetProductRepository();
 
         // GET: Products
-        [Authorize]
+        
         //[ActionName("Index.aspx")]
-        public ActionResult Index(string SortBy, string Keyword, int PageNo = 1)
+        public override ActionResult Index(string SortBy, string Keyword, int PageNo = 1)
         {
             var MyResult = db.All().AsQueryable();
             if (!String.IsNullOrEmpty(Keyword))

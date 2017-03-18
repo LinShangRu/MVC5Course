@@ -11,6 +11,12 @@ namespace MVC5Course.Controllers
     {
         public ProductRepository db = RepositoryHelper.GetProductRepository();
 
+        //[Authorize]
+        //public virtual ActionResult Index(string SortBy, string Keyword, int PageNo = 1)
+        //{
+        //    return this.View(this.ControllerContext);
+        //}
+
         protected override void HandleUnknownAction(string actionName)
         {
             //this.View("Index").ExecuteResult(this.ControllerContext);

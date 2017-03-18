@@ -17,6 +17,12 @@ namespace MVC5Course.Controllers
         //    return this.View(this.ControllerContext);
         //}
 
+        //[Authorize]
+        //public virtual ActionResult Index()
+        //{
+        //    return this.View(this.ControllerContext);
+        //}
+
         protected override void HandleUnknownAction(string actionName)
         {
             //this.View("Index").ExecuteResult(this.ControllerContext);

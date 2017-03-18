@@ -19,7 +19,7 @@ namespace MVC5Course.Controllers
         // GET: Products
         
         //[ActionName("Index.aspx")]
-        public override ActionResult Index(string SortBy, string Keyword, int PageNo = 1)
+        public ActionResult Index(string SortBy, string Keyword, int PageNo = 1)
         {
             var MyResult = db.All().AsQueryable();
             if (!String.IsNullOrEmpty(Keyword))

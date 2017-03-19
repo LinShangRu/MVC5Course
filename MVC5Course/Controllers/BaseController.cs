@@ -24,12 +24,12 @@ namespace MVC5Course.Controllers
         //    return this.View(this.ControllerContext);
         //}
 
-        protected override void HandleUnknownAction(string actionName)
-        {
-            //this.View("Index").ExecuteResult(this.ControllerContext);
-            this.Redirect("/").ExecuteResult(this.ControllerContext);
+        //protected override void HandleUnknownAction(string actionName)
+        //{
+        //    //this.View("Index").ExecuteResult(this.ControllerContext);
+        //    this.Redirect("/").ExecuteResult(this.ControllerContext);
 
-            //base.HandleUnknownAction(actionName);
-        }
+        //    //base.HandleUnknownAction(actionName);
+        //}
     }
 }

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
 using PagedList;
+using System.Data.Entity.Validation;
 
 namespace MVC5Course.Controllers
 {
@@ -126,15 +127,17 @@ namespace MVC5Course.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+        [HandleError(View = "Error_DbEntityValidationException", ExceptionType = typeof(DbEntityValidationException))]
         public ActionResult Edit(int id)
         {
             var aaa = db.Find(id);
             if (TryUpdateModel(aaa,new string[] { "ProductName", "Stock" }))
             {
-                db.UnitOfWork.Commit();
-                return RedirectToAction("Index");
+
             }
-            return View(aaa);
+            db.UnitOfWork.Commit();
+            return RedirectToAction("Index");
+            //return View(aaa);
         }
 
         // GET: Products/Delete/5

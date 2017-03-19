@@ -22,6 +22,7 @@ namespace MVC5Course.Controllers
 
 
         //[ActionName("Index.aspx")]
+        [本機測試Attribute]
         public ActionResult Index(string SortBy, string Keyword, int PageNo = 1)
         {
             IQueryable<Product> MyResult = DoSearchAll(ref SortBy, Keyword, PageNo);
@@ -133,7 +134,7 @@ namespace MVC5Course.Controllers
         {
             //DbEntityValidationException ab;
             //Type a = typeof(DbEntityValidationException);
-            //ab = Convert.ChangeType(a,typeof(a.GetType());
+            //ab = Convert.ChangeType(a, typeof(a.GetType());
             var aaa = db.Find(id);
             if (TryUpdateModel(aaa,new string[] { "ProductName", "Stock" }))
             {

@@ -11,6 +11,7 @@ namespace MVC5Course.Models
     {
         [Required]
         public int ProductType { get; set; }
+        
     }
     
     public partial class ProductMetaData

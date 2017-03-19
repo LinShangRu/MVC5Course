@@ -9,8 +9,10 @@ namespace MVC5Course.Controllers
     public class TestController : Controller
     {
         // GET: Test
-        public ActionResult Index()
+        public ActionResult Index(string demo)
         {
+            if ("error".Equals(demo))
+                throw new ArgumentOutOfRangeException("ex");
             ViewBag.Message = "Test-Index";
             return View();
         }

@@ -134,7 +134,8 @@ namespace MVC5Course.Controllers
         {
             //DbEntityValidationException ab;
             //Type a = typeof(DbEntityValidationException);
-            //ab = Convert.ChangeType(a, typeof(a.GetType());
+            ////a.GetType().FullName;
+            //ab = Convert.ChangeType(a, a.GetType());
             var aaa = db.Find(id);
             if (TryUpdateModel(aaa,new string[] { "ProductName", "Stock" }))
             {

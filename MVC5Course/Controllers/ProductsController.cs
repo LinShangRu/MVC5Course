@@ -12,6 +12,7 @@ using System.Data.Entity.Validation;
 
 namespace MVC5Course.Controllers
 {
+    
     public class ProductsController : BaseController
     {
         //private FabricsEntities db = new FabricsEntities();
@@ -130,14 +131,15 @@ namespace MVC5Course.Controllers
         [HandleError(View = "Error_DbEntityValidationException", ExceptionType = typeof(DbEntityValidationException))]
         public ActionResult Edit(int id)
         {
+            //DbEntityValidationException ab;
+            //Type a = typeof(DbEntityValidationException);
+            //ab = Convert.ChangeType(a,typeof(a.GetType());
             var aaa = db.Find(id);
             if (TryUpdateModel(aaa,new string[] { "ProductName", "Stock" }))
             {
-
-            }
-            db.UnitOfWork.Commit();
-            return RedirectToAction("Index");
-            //return View(aaa);
+                db.UnitOfWork.Commit();
+                return RedirectToAction("Index");
+            }return View(aaa);
         }
 
         // GET: Products/Delete/5

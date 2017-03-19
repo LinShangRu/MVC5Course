@@ -419,6 +419,7 @@
     <Content Include="Views\Home\RazorTest.cshtml" />
     <Content Include="Views\Home\Demo.cshtml" />
     <Content Include="Views\Shared\_LayoutDemo.cshtml" />
+    <Content Include="Views\Products\ShowOrderLine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

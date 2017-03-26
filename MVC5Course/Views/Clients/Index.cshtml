@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutDemo.cshtml";
+
 }
 
 <h2>Index</h2>
-
+<div id="Ajaxing">AJAX Loading....</div>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -74,9 +75,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
+        <td>@Html.DisplayFor(modelItem => item.Gender)</td>
         <td>
             @Html.DisplayFor(modelItem => item.DateOfBirth)
         </td>
@@ -115,10 +114,11 @@
         </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ClientId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClientId }) |
+            @Ajax.ActionLink("Details", "Details", new { id=item.ClientId },new AjaxOptions {  UpdateTargetId = "AjaxPanel", LoadingElementId= "Ajaxing",Confirm="確定AJAX?"}) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ClientId })
         </td>
     </tr>
 }
 
 </table>
+<div id="AjaxPanel"></div>

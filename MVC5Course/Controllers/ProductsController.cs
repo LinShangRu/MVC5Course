@@ -23,17 +23,12 @@ namespace MVC5Course.Controllers
 
         //[ActionName("Index.aspx")]
         [本機測試Attribute]
-        public ActionResult Index(string SortBy, string Keyword,string FilterAction, int PageNo = 1)
+        public ActionResult Index(string FilterAction,string SortBy, string Keyword, int PageNo = 1)
         {
             //List<SelectListItem> MyList = new List<SelectListItem>();
             //MyList.Add(new SelectListItem() { Text = "True", Value = "True" });
             //MyList.Add(new SelectListItem() { Text = "False", Value = "False" });
             //ViewBag.FilterAction = new SelectList(new List<string> { "True", "False" });
-
-
-            
-
-
             var activeOptions = db.All().Select(p => p.Active.HasValue ? p.Active.Value.ToString() : "False").Distinct().ToList();
             ViewBag.FilterAction = new SelectList(activeOptions);
 

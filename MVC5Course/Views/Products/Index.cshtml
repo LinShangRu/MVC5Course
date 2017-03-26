@@ -8,8 +8,12 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
-</p>
 
+</p>
+<form>
+    @Html.DropDownList("FilterAction", null, "請選擇", new { onchange = "" })
+    <input type="submit" value="搜尋" />
+</form>
 
 @using PagedList
 @using PagedList.Mvc

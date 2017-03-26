@@ -23,16 +23,30 @@ namespace MVC5Course.Controllers
 
         //[ActionName("Index.aspx")]
         [本機測試Attribute]
-        public ActionResult Index(string SortBy, string Keyword, int PageNo = 1)
+        public ActionResult Index(string SortBy, string Keyword,string FilterAction, int PageNo = 1)
         {
-            IQueryable<Product> MyResult = DoSearchAll(ref SortBy, Keyword, PageNo);
+            //List<SelectListItem> MyList = new List<SelectListItem>();
+            //MyList.Add(new SelectListItem() { Text = "True", Value = "True" });
+            //MyList.Add(new SelectListItem() { Text = "False", Value = "False" });
+            //ViewBag.FilterAction = new SelectList(new List<string> { "True", "False" });
+
+
+            
+
+
+            var activeOptions = db.All().Select(p => p.Active.HasValue ? p.Active.Value.ToString() : "False").Distinct().ToList();
+            ViewBag.FilterAction = new SelectList(activeOptions);
+
+            IQueryable<Product> MyResult = DoSearchAll(ref SortBy, Keyword, PageNo, FilterAction);
             return View(MyResult.ToPagedList(PageNo, 20));
             //return View("Index", MyResult.ToPagedList(PageNo, 20));
         }
 
-        private IQueryable<Product> DoSearchAll(ref string SortBy, string Keyword, int PageNo)
+        private IQueryable<Product> DoSearchAll(ref string SortBy, string Keyword, int PageNo, string QueryFilterAction)
         {
             var MyResult = db.All().AsQueryable();
+            if (!String.IsNullOrEmpty(QueryFilterAction))
+            { MyResult = MyResult.Where(m => m.Active == (QueryFilterAction.Equals("True") ? true : false)); }
             if (!String.IsNullOrEmpty(Keyword))
             { MyResult = MyResult.Where(m => m.ProductName.Contains(Keyword)); }
             if (String.IsNullOrEmpty(SortBy))
@@ -52,7 +66,7 @@ namespace MVC5Course.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Product[] data, string SortBy, string Keyword, int PageNo = 1)
+        public ActionResult Index(Product[] data, string SortBy, string Keyword, string FilterAction, int PageNo = 1)
         {
             if (ModelState.IsValid && data !=null)
             {
@@ -66,7 +80,9 @@ namespace MVC5Course.Controllers
                 }
                 db.UnitOfWork.Commit();
             }
-            IQueryable<Product> MyResult = DoSearchAll(ref SortBy, Keyword, PageNo);
+            var activeOptions = db.All().Select(p => p.Active.HasValue ? p.Active.Value.ToString() : "False").Distinct().ToList();
+            ViewBag.FilterAction = new SelectList(activeOptions);
+            IQueryable<Product> MyResult = DoSearchAll(ref SortBy, Keyword, PageNo, FilterAction);
             return View(MyResult.ToPagedList(PageNo, 20));
         }
 

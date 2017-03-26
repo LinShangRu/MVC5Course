@@ -8,7 +8,8 @@
 <div>
     <h4>Product</h4>
     <hr />
-    @Html.DisplayForModel()
+    @*@Html.DisplayForModel()*@
+    @Html.DisplayFor(m => m)
 </div>
 
     @Html.Partial("ShowOrderLine", @Model.OrderLine)

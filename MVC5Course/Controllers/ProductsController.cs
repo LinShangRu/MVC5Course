@@ -170,7 +170,7 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product.OrderLine);
+            return PartialView(product.OrderLine);
         }
 
         // POST: Products/Delete/5

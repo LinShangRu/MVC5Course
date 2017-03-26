@@ -24,6 +24,9 @@ namespace MVC5Course.Controllers
 
         public ActionResult About()
         {
+            throw new Exception("XXXXX");
+            string a = null;
+            int i = a.Length;
             ViewBag.Message = "Your application description page!!";
 
             return View();
